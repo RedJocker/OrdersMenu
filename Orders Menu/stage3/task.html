@@ -3,26 +3,45 @@
 <h2>Description</h2>
 
 <p>
-    Besides the title we would like to list menu items.
+    We don't want to just list menu items on our app.
+    We should also give waiters a way to adjust
+    the quantity of a certain menu item that will be ordered.
+    Also we should limit the amount ordered
+    considering the amount in stock otherwise
+    the kitchen won't be able to complete the order.
 </p>
 <p>
-    To be able to visually differentiate
-    the title from the rest of the text content,
-    let's use styling and position to signal this difference.
+    Let's improve the MenuItem component so that waiters can click
+    to increase/decrease amount ordered
+    and see the what is the current amount.
+    Change text to red if the amount ordered is on max limit.
 </p>
 
 
 <h2>Objectives</h2>
 <ol>
-    <li>Make the existing Title component be displayed at the center with text size 48dp </li>
+    <li>Add a Text with text "+" on same line as the existing Text with text "Fettuccine"</li>
+    <li>Add a onClick to "+" so that the amountOrdered increases after it is clicked</li>
     <li>
-        Add a new component MenuItem that only holds a Text with text "Fettuccine"
+        Add a Text on same line as the existing Text with text "Fettuccine"
+        set text to the current amountOrdered
     </li>
     <li>
-        Make the component MenuItem to be displayed at the start with text size 24dp
+        The initial amount ordered is 0
     </li>
     <li>
-        Display MenuItem bellow Title
+        Add a Text with text "-" on same line as existing Text with text "Fettuccine"
+    </li>
+    <li>Add a onClick to "-" so that the amountOrdered increases after it is clicked</li>
+    <li>If the amountOrdered has not yet achieved the amountStock make "Fettuccine" text color black</li>
+    <li>
+        If the amountOrdered is equal to the amountStock make "Fettuccine" text color red
+    </li>
+    <li>
+        amountOrdered cannot be negative nor bigger than amountStock
+    </li>
+    <li>
+        consider the amountStock of "Fettuccine" to be 5
     </li>
 </ol>
 </html>

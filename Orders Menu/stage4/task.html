@@ -3,45 +3,52 @@
 <h2>Description</h2>
 
 <p>
-    We don't want to just list menu items on our app.
-    We should also give waiters a way to adjust
-    the quantity of a certain menu item that will be ordered.
-    Also we should limit the amount ordered
-    considering the amount in stock otherwise
-    the kitchen won't be able to complete the order.
+    Our component MenuItem is working, but the menu has more than
+    just Fettuccine. Let's display a list of MenuItem with all
+    the recipes on menu.
 </p>
 <p>
-    Let's improve the MenuItem component so that waiters can click
-    to increase/decrease amount ordered
-    and see the what is the current amount.
-    Change text to red if the amount ordered is on max limit.
+    The logic for each MenuItem should take into consideration
+    the stock for that specific item
+    and restrict the order's amount like was done on last stage.
 </p>
 
 
 <h2>Objectives</h2>
 <ol>
-    <li>Add a Text with text "+" on same line as the existing Text with text "Fettuccine"</li>
-    <li>Add a onClick to "+" so that the amountOrdered increases after it is clicked</li>
     <li>
-        Add a Text on same line as the existing Text with text "Fettuccine"
-        set text to the current amountOrdered
+        Each MenuItem has
+        a recipe name,
+        a plus,
+        an order amount
+        and a minus
+        like the one that already exists for Fettuccine.
     </li>
     <li>
-        The initial amount ordered is 0
+        Use the following data that represent
+        the relation between recipe name and stock amount
+        <br><br>
+
+        <pre><code>
+    val recipesNameToStockAmount = mapOf(
+            "Fettuccine" to 5,
+            "Risotto" to 6,
+            "Gnocchi" to 4,
+            "Spaghetti" to 3,
+            "Lasagna" to 5,
+            "Steak Parmigiana" to 2
+    )</code></pre><br>
     </li>
     <li>
-        Add a Text with text "-" on same line as existing Text with text "Fettuccine"
-    </li>
-    <li>Add a onClick to "-" so that the amountOrdered increases after it is clicked</li>
-    <li>If the amountOrdered has not yet achieved the amountStock make "Fettuccine" text color black</li>
-    <li>
-        If the amountOrdered is equal to the amountStock make "Fettuccine" text color red
+        Create one MenuItem for each recipe
     </li>
     <li>
-        amountOrdered cannot be negative nor bigger than amountStock
+        Each recipe has it's own order amount and stock amount
+        and the logic for each MenuItem should take only
+        it's own recipe into consideration
     </li>
     <li>
-        consider the amountStock of "Fettuccine" to be 5
+        Display all recipes as a list of MenuItem
     </li>
 </ol>
 </html>

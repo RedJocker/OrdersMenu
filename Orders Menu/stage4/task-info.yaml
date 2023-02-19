@@ -24,3 +24,5 @@ files:
   visible: false
 - name: src/test/java/org/hyperskill/ordersmenu/Stage2UnitTest.kt
   visible: false
+- name: src/test/java/org/hyperskill/ordersmenu/Stage4UnitTest.kt
+  visible: false

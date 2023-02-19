@@ -3,52 +3,74 @@
 <h2>Description</h2>
 
 <p>
-    Our component MenuItem is working, but the menu has more than
-    just Fettuccine. Let's display a list of MenuItem with all
-    the recipes on menu.
+    Waiters can input the amount ordered for every
+    item on menu, but they still can't register the
+    order.
 </p>
 <p>
-    The logic for each MenuItem should take into consideration
-    the stock for that specific item
-    and restrict the order's amount like was done on last stage.
+    Let's add a button to register the order.
+    When an order is made send a visual feedback
+    with the order summary.
+    Also the amount stock should be decreased,
+    the order amount for each item should be reset to zero
+    and the limit on new orders should follow the new stock state.
 </p>
 
 
 <h2>Objectives</h2>
 <ol>
     <li>
-        Each MenuItem has
-        a recipe name,
-        a plus,
-        an order amount
-        and a minus
-        like the one that already exists for Fettuccine.
+        Add a <code>Button</code>
+        with background color black
+        and content color white.
+        Inside the <code>Button</code>
+        add a <code>Text</code>
+        with text <code>"Make Order"</code>
+        and font size <code>24sp</code>
     </li>
     <li>
-        Use the following data that represent
-        the relation between recipe name and stock amount
-        <br><br>
+        Add an <code>onClick</code> listener on the button
+        that trigger an event to register the order
+        <ul>
+            <li>
+                If the button is clicked
+                with all order quantities equal to zero
+                then do nothing
+            </li>
+            <li>
+                If the button is clicked
+                and one item only has quantity greater than zero
+                then Toast a message with the following format
+                <code>
+                    "Ordered:\n==> ${recipeName}: $orderAmount"
+                </code>
+                and update the stock amount of that recipe
+            </li>
+            <li>
+                If the button is clicked
+                and many items have quantity greater than zero
+                then Toast a message that besides the same
+                header as the case above
+                also has one line for each of those items
+                using the same recipe line format as the case above
+                and update the stock of each ordered item
+            </li>
+        </ul>
+    </li>
 
-        <pre><code>
-    val recipesNameToStockAmount = mapOf(
-            "Fettuccine" to 5,
-            "Risotto" to 6,
-            "Gnocchi" to 4,
-            "Spaghetti" to 3,
-            "Lasagna" to 5,
-            "Steak Parmigiana" to 2
-    )</code></pre><br>
-    </li>
     <li>
-        Create one MenuItem for each recipe
-    </li>
-    <li>
-        Each recipe has it's own order amount and stock amount
-        and the logic for each MenuItem should take only
-        it's own recipe into consideration
-    </li>
-    <li>
-        Display all recipes as a list of MenuItem
+        After an order is made
+        <ul>
+            <li>Update the stock amount</li>
+            <li>
+                Visual cues and limit to order amount should follow
+                the new state of stock amount
+            </li>
+            <li>
+                Prepare to receive new orders by resetting
+                ordered amount to 0
+            </li>
+        </ul>
     </li>
 </ol>
 </html>

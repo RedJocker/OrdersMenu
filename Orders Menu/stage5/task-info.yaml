@@ -32,3 +32,5 @@ files:
   visible: true
 - name: src/main/java/org/hyperskill/ordersmenu/composables/MakeOrderButton.kt
   visible: true
+- name: src/test/java/org/hyperskill/ordersmenu/Stage5UnitTest.kt
+  visible: false

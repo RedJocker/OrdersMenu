@@ -56,7 +56,7 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
 
             getTextLayoutResult.action?.invoke(list) // populates list
             val textLayoutResult = list.getOrNull(0)
-                ?: return@SemanticsMatcher false
+                ?: throw IllegalStateException("It was expected for a Text node to have TextLayoutResult")
 
             val textLeft = (0 until textLayoutResult.lineCount).fold(Float.POSITIVE_INFINITY) { acc, cur ->
                 val lineStart = textLayoutResult.getLineLeft(cur)
@@ -88,10 +88,10 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
             val config = node.config
             val list = mutableListOf<TextLayoutResult>()
             val getTextLayoutResult = config.getOrNull(SemanticsActions.GetTextLayoutResult)
-                ?: throw IllegalArgumentException("isTextCenteredOnWindow expects a Text node")
+                ?: throw IllegalArgumentException("isTextOnWindowStart expects a Text node")
             getTextLayoutResult.action?.invoke(list) // populates list
             val textLayoutResult = list.getOrNull(0)
-                ?: return@SemanticsMatcher false
+                ?: throw IllegalStateException("It was expected for a Text node to have TextLayoutResult")
 
             val textStart = if(node.layoutInfo.layoutDirection == LayoutDirection.Rtl) {
                 val textRight = (0 until textLayoutResult.lineCount).fold(Float.NEGATIVE_INFINITY) { acc, cur ->

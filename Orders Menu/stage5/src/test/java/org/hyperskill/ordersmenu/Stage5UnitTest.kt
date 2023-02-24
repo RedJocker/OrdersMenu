@@ -22,7 +22,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     @Test
     fun test00_checkMakeOrderButtonExists() {
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
                 val makeOderButtonNode = onNode(
@@ -53,7 +52,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     fun test01_checkToastIsSentWhenFettuccineOderIsSubmitted() {
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
                 val fettuccineNode = onNode(hasTextExactly("Fettuccine"))
@@ -86,7 +84,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     fun test02_checkToastIsNotSentWhenEveryAmountIsZero() {
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
 
@@ -115,7 +112,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
         // assumes the existence in recipesOnMenuToInitialStockMap of entry "Steak Parmigiana" to 2
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             val recipeName = "Steak Parmigiana"
             composeTestRule.apply {
@@ -201,7 +197,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     fun test04_checkAfterMenuItemOrderStockAmountDecreasesWithIndividualOrders() {
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
 
@@ -293,7 +288,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     fun test05_checkAfterMenuItemOrderStockAmountDecreasesWithOneCollectiveOrder() {
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
 
@@ -408,7 +402,6 @@ class Stage5UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
     fun test06_checkAllOutOrder() {
 
         composeTestRule.activityRule.scenario.onActivity { activity: Activity ->
-            debugResearchPurposes(activity)
 
             composeTestRule.apply {
 

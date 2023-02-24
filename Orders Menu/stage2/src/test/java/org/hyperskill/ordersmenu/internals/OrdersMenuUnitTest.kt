@@ -5,10 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.boundsInWindow
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsActions
-import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -114,9 +111,7 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
 
     fun isOnSameRowAs(otherNode: SemanticsNodeInteraction): SemanticsMatcher {
         return SemanticsMatcher(
-            "is on same row as ${otherNode.printToString()
-                .substringAfter("\n")
-                .replace('\n', ' ')}"
+            "is on same row as ${otherNode.nodeAsString()}"
         ) { node ->
             val otherNodeYPosition = otherNode.fetchSemanticsNode().positionInWindow.y
             val nodeYPosition = node.positionInWindow.y
@@ -125,10 +120,7 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
     }
 
     fun isBelow(otherNode: SemanticsNodeInteraction): SemanticsMatcher {
-        return SemanticsMatcher(
-            "is on bellow ${otherNode.printToString()
-                .substringAfter("\n")
-                .replace('\n', ' ')}"
+        return SemanticsMatcher("is bellow ${otherNode.nodeAsString()}"
         ) { node ->
             val nodeBellowY = node.layoutInfo.coordinates.boundsInWindow().top
             val nodeAboveY = otherNode.fetchSemanticsNode().layoutInfo.coordinates.boundsInWindow().bottom
@@ -146,8 +138,40 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
         }
     }
 
+    fun assertNotOverlapEachOthers(
+        listOfNodes: List<SemanticsNode>
+    ) {
+        listOfNodes.forEachIndexed { i, node ->
+            val subList = listOfNodes.drop(i + 1)
+            subList.forEach { anotherNode ->
+
+                val hasIntersection = anotherNode.boundsInWindow.intersect(node.boundsInWindow).let {
+                    // from intersect docstring
+                    // 'If the two rectangles do not overlap,
+                    // then the resulting Rect will have a negative width or height'
+                    it.width > 0 && it.height > 0
+                }
+
+
+                assert(!hasIntersection) {
+                    val nodeText = node.config.getOrNull(SemanticsProperties.Text).toString()
+                    val anotherNodeText = anotherNode.config.getOrNull(SemanticsProperties.Text).toString()
+                    "View with text $nodeText and bounds ${node.boundsInWindow}" +
+                            " should not overlap " +
+                            "view with text $anotherNodeText and bounds ${anotherNode.boundsInWindow}"
+                }
+            }
+        }
+    }
+
     fun Color.rgbEquals(other: Color): Boolean {
         return this.red == other.red && this.green == other.green && this.blue == other.blue
+    }
+
+    fun SemanticsNodeInteraction.nodeAsString(): String{
+        return this.printToString()
+            .substringAfter("\n")
+            .replace('\n', ' ')
     }
 
     //////////////////////

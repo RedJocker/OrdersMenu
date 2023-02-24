@@ -5,10 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.boundsInWindow
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsActions
-import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -138,6 +135,32 @@ open class OrdersMenuUnitTest<T : Activity>(clazz: Class<T>): AbstractUnitTest<T
             val config = node.config
             val role = config.getOrNull(SemanticsProperties.Role)
             role == Role.Button
+        }
+    }
+
+    fun assertNotOverlapEachOthers(
+        listOfNodes: List<SemanticsNode>
+    ) {
+        listOfNodes.forEachIndexed { i, node ->
+            val subList = listOfNodes.drop(i + 1)
+            subList.forEach { anotherNode ->
+
+            val hasIntersection = anotherNode.boundsInWindow.intersect(node.boundsInWindow).let {
+                // from intersect docstring
+                // 'If the two rectangles do not overlap,
+                // then the resulting Rect will have a negative width or height'
+                it.width > 0 && it.height > 0
+            }
+
+
+            assert(!hasIntersection) {
+                val nodeText = node.config.getOrNull(SemanticsProperties.Text).toString()
+                val anotherNodeText = anotherNode.config.getOrNull(SemanticsProperties.Text).toString()
+                "View with text $nodeText and bounds ${node.boundsInWindow}" +
+                    " should not overlap " +
+                    "view with text $anotherNodeText and bounds ${anotherNode.boundsInWindow}"
+                }
+            }
         }
     }
 

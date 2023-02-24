@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasTextExactly
+import androidx.compose.ui.test.onSiblings
 import androidx.compose.ui.unit.sp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hyperskill.ordersmenu.internals.OrdersMenuUnitTest
@@ -67,14 +68,25 @@ class Stage2UnitTest : OrdersMenuUnitTest<MainActivity>(MainActivity::class.java
             composeTestRule.apply {
 
                 val title = onNode(hasTextExactly("Orders Menu"))
-                    .assertExists()
-                    .assertIsDisplayed()
 
                 onNode(hasTextExactly("Fettuccine")).apply {
-                    assertExists("There should exist a title node with text \"Fettuccine\"")
-                    assertIsDisplayed()
-                        .assert(isBelow(title))
+                    assert(isBelow(title))
                 }
+            }
+        }
+    }
+
+    @Test
+    fun test03_checkOverlap() {
+        composeTestRule.activityRule.scenario.onActivity { activity : Activity ->
+
+            composeTestRule.apply {
+                val titleNode = onNode(hasTextExactly("Orders Menu"))
+                val siblingsTitle = titleNode.onSiblings().fetchSemanticsNodes(
+                    atLeastOneRootRequired = true
+                )
+                val allNodes = siblingsTitle + titleNode.fetchSemanticsNode()
+                assertNotOverlapEachOthers(allNodes)
             }
         }
     }

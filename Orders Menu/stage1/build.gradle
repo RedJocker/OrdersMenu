@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
 
@@ -39,25 +39,22 @@ android {
 }
 
 dependencies {
-    def kotlinVersion = hs.android.kotlinVersion
+    def kotlinVersion = "1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
-    def coreKtx = hs.android.lib.coreKtx
+    def coreKtx = "1.7.0"
     implementation "androidx.core:core-ktx:$coreKtx"
 
-    def appCompat = hs.android.lib.appCompat
+    def appCompat = "1.3.1"
     implementation "androidx.appcompat:appcompat:$appCompat"
 
-    def constraintLayout = hs.android.lib.constraintLayout
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-
-    def material = hs.android.lib.material
-    implementation "com.google.android.material:material:$material"
-
     // compose
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation "androidx.compose.ui:ui:1.2.0"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.2.0"
-    implementation 'androidx.compose.material:material:1.2.0'
+    def composeUi = "1.3.3"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation 'androidx.compose.material:material:1.3.1'
+    implementation "androidx.compose.ui:ui:$composeUi"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeUi"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeUi"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeUi"
 }

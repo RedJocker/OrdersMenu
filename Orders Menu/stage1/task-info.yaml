@@ -22,3 +22,11 @@ files:
   visible: false
 - name: src/test/java/org/hyperskill/ordersmenu/internals/OrdersMenuUnitTest.kt
   visible: false
+- name: src/main/java/org/hyperskill/ordersmenu/theme/Color.kt
+  visible: true
+- name: src/main/java/org/hyperskill/ordersmenu/theme/Shape.kt
+  visible: true
+- name: src/main/java/org/hyperskill/ordersmenu/theme/Theme.kt
+  visible: true
+- name: src/main/java/org/hyperskill/ordersmenu/theme/Type.kt
+  visible: true
